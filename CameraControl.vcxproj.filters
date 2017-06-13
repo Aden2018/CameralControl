@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="头文件\Command">
+      <UniqueIdentifier>{163c2514-3c95-4d4d-84f7-aae278557df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Command\EVF">
+      <UniqueIdentifier>{4a7f7582-6060-4673-9e14-9019d8429b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Camera">
+      <UniqueIdentifier>{5a168ff8-7e6f-4204-bdb1-28e8325bf244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Class">
+      <UniqueIdentifier>{33a62e52-9c00-46ae-9547-fb991c6b101e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\EDSDK">
+      <UniqueIdentifier>{d4dcb04b-a69c-4785-8330-3eaad951b389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActionButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AEMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Av.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraControl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraControlDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EvfAFMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EVFPictureBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EvfZoomButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ExposureComp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageQuality.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Iso.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MeteringMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyComboBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Tv.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="YanshiPath.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActionButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AEMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Av.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraControl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraControlDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EvfAFMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EVFPictureBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EvfZoomButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExposureComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageQuality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Iso.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MeteringMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyComboBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Tv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CloseSessionCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Command.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\DoEvfAFCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\DownloadCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\GetPropertyCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\GetPropertyDescCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\NotifyCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\OpenSessionCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\PressShutterButtonCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\SaveSettingCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\SetCapacityCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\SetPropertyCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\TakePictureCommand.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\DownloadEvfCommand.h">
+      <Filter>头文件\Command\EVF</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\DriveLensCommand.h">
+      <Filter>头文件\Command\EVF</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\EndEvfCommand.h">
+      <Filter>头文件\Command\EVF</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\StartEvfCommand.h">
+      <Filter>头文件\Command\EVF</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraController.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraEvent.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraEventListener.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraModel.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraModelLegacy.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Processor.h">
+      <Filter>头文件\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\ActionEvent.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\ActionListener.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\ActionSource.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Observer.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Synchronized.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Thread.h">
+      <Filter>头文件\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Edsdk\Header\EDSDK.h">
+      <Filter>头文件\EDSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Edsdk\Header\EDSDKErrors.h">
+      <Filter>头文件\EDSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Edsdk\Header\EDSDKTypes.h">
+      <Filter>头文件\EDSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="YanshiPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\CameraControl.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CameraControl.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuildStep Include="res\CameraControl.manifest" />
+  </ItemGroup>
+</Project>
