@@ -236,7 +236,17 @@ LRESULT CCameraControlDlg::OnProgressReport(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+CString GetAppPath()
+{
+	//取得应用程序路径	
+	TCHAR exeFullPath[MAX_PATH];
+	GetModuleFileName(NULL,exeFullPath,MAX_PATH);
+	CString pathName(exeFullPath);
 
+	//返回值最后自带'\\'
+	int index =pathName.ReverseFind('\\');
+	return pathName.Left(index+1);
+}
 
 void CCameraControlDlg::OnBnClickedButton19()  //选择图片存储文件夹
 {
@@ -244,8 +254,10 @@ void CCameraControlDlg::OnBnClickedButton19()  //选择图片存储文件夹
 	m_nImageIndex=0;  //图片拍照索引值清0
 
 	//得到二级目录名称 E:\\3Drestructure\\相机600D\\settingD.ini
-	m_pathSecIndex=::GetPrivateProfileInt("二级目录索引值","m_pathIndex",0,"E:\\3Drestructure\\相机600D\\settingD.ini");
-
+	
+	//m_pathSecIndex=::GetPrivateProfileInt("二级目录索引值","m_pathIndex",0,"E:\\3Drestructure\\相机600D\\settingD.ini");
+	m_pathSecIndex = ::GetPrivateProfileInt("二级目录索引值","m_pathIndex",0,GetAppPath()+"settingD.ini");
+	
 	CYanshiPath  YSpathDlg;
 	YSpathDlg.DoModal();   //弹出存储路径对话框
 }
