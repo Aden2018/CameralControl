@@ -94,4 +94,6 @@ protected:
 public:
 	afx_msg void OnClose();
 	afx_msg void OnBnClickedButton19();
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton3();
 };

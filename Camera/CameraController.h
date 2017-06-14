@@ -237,6 +237,7 @@ public:
 		{
 			StoreAsync(new DoEvfAFCommand(_model, kEdsCameraCommand_EvfAf_ON));
 		}
+
 		if (command == "evfAFOff")  //自动对焦关
 		{
 			StoreAsync(new DoEvfAFCommand(_model, kEdsCameraCommand_EvfAf_OFF));			
