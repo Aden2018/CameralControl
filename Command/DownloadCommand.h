@@ -60,7 +60,7 @@ public:
 				CameraEvent e("DownloadStart");
 				_model->notifyObservers(&e);
 			}
-			err = EdsDownload( _directoryItem, dirItemInfo.size, stream);
+			//err = EdsDownload( _directoryItem, dirItemInfo.size, stream);
 		}
 		//Set Progress
 		if(err == EDS_ERR_OK)
@@ -69,10 +69,10 @@ public:
 		}
 
 		//Download image
-		/*if(err == EDS_ERR_OK)
+		if(err == EDS_ERR_OK)
 		{
-		err = EdsDownload( _directoryItem, dirItemInfo.size, stream);
-		}*/
+			err = EdsDownload( _directoryItem, dirItemInfo.size, stream);
+		}
 
 		//Forwarding completion
 		if(err == EDS_ERR_OK)  //´æ´¢µ½µçÄÔ

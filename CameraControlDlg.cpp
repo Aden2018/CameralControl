@@ -74,7 +74,6 @@ int CCameraControlDlg::GetFileName(const string &strFolder, vector<string> &strV
 	}
 	_findclose(handle);  
 	return strVecFileNames.size();
-	
 }
 
 CString CCameraControlDlg::findAndCreateValidPath()
@@ -142,6 +141,10 @@ BEGIN_MESSAGE_MAP(CCameraControlDlg, CDialog)
 	ON_MESSAGE(WM_USER_PROGRESS_REPORT, OnProgressReport)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDC_BTN_SET_PATH, &CCameraControlDlg::OnBnClickedBtnSetPath)
+	ON_STN_CLICKED(IDC_TXT_PATH, &CCameraControlDlg::OnStnClickedTxtPath)
+	ON_BN_CLICKED(IDC_BTN_OPEN_SAVEPATH, &CCameraControlDlg::OnBnClickedBtnOpenSavepath)
+	ON_BN_CLICKED(IDC_BTN_TAKESOMEPICS, &CCameraControlDlg::OnBnClickedBtnTakesomepics)
+	ON_BN_CLICKED(IDC_BTN_STOP, &CCameraControlDlg::OnBnClickedBtnStop)
 END_MESSAGE_MAP()
 
 
@@ -308,6 +311,8 @@ LRESULT CCameraControlDlg::OnDownloadComplete(WPARAM wParam, LPARAM lParam)
 {
 	//End of download of image
 	_progress.SetPos(0);
+	if(--m_nCount > 0)
+		fireEvent("TakePicture");
 	return 0;
 }
 
@@ -386,4 +391,35 @@ void CCameraControlDlg::OnBnClickedBtnSetPath()
 	CString curPath = "µ±Ç°Â·¾¶:";
 	curPath += g_savePath;
 	SetDlgItemText(IDC_TXT_PATH,curPath);
+}
+
+
+void CCameraControlDlg::OnStnClickedTxtPath()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CCameraControlDlg::OnBnClickedBtnOpenSavepath()
+{
+	// TODO: Add your control notification handler code here
+
+	system("explorer " + g_savePath);
+
+	//WinExec("explorer \"" + g_savePath + "\"",SW_HIDE);
+}
+
+
+void CCameraControlDlg::OnBnClickedBtnTakesomepics()
+{
+	// TODO: Add your control notification handler code here
+	m_nCount = 30;
+	fireEvent("TakePicture");
+}
+
+
+void CCameraControlDlg::OnBnClickedBtnStop()
+{
+	// TODO: Add your control notification handler code here
+	m_nCount = 0;
 }

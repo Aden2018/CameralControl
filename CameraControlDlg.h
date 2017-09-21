@@ -105,6 +105,7 @@ private:
 	char m_strSaveType[256];
 	int		m_nSaveIdx;
 	char m_strSaveName[256]; //子文件夹的名称 3dpicture
+	int m_nCount;
 	//CString m_strSavePath; //最终保存的文件夹全路径
 	CString GetAppPath();
 	CString findAndCreateValidPath();
@@ -121,4 +122,8 @@ private:
 	} 
 public:
 	afx_msg void OnBnClickedBtnSetPath();
+	afx_msg void OnStnClickedTxtPath();
+	afx_msg void OnBnClickedBtnOpenSavepath();
+	afx_msg void OnBnClickedBtnTakesomepics();
+	afx_msg void OnBnClickedBtnStop();
 };
