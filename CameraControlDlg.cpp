@@ -27,6 +27,10 @@ CCameraControlDlg::CCameraControlDlg(CWnd* pParent )
 	: CDialog(CCameraControlDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_strIniPath = "settingD.ini";
+
+	GetPrivateProfileString("Setting","RootPath","E:\\3DData\\",m_strSavePath.GetBuffer(),100,m_strIniPath);
+	
 }
 
 void CCameraControlDlg::DoDataExchange(CDataExchange* pDX)
@@ -70,7 +74,6 @@ BEGIN_MESSAGE_MAP(CCameraControlDlg, CDialog)
 	ON_MESSAGE(WM_USER_DOWNLOAD_COMPLETE, OnDownloadComplete)
 	ON_MESSAGE(WM_USER_PROGRESS_REPORT, OnProgressReport)
 	ON_WM_CLOSE()
-	ON_BN_CLICKED(IDC_BUTTON19, &CCameraControlDlg::OnBnClickedButton19)
 END_MESSAGE_MAP()
 
 
@@ -191,6 +194,11 @@ void CCameraControlDlg::OnClose()
 	_comboEvfAFMode.EnableWindow(FALSE);	
 	_btnEvfAfON.EnableWindow(FALSE);
 	_btnEvfAfOFF.EnableWindow(FALSE);
+
+	
+	//_controller->doCloseEVFAction();
+
+
 	__super::OnClose();
 }
 
@@ -260,4 +268,10 @@ void CCameraControlDlg::OnBnClickedButton19()  //选择图片存储文件夹
 	
 	CYanshiPath  YSpathDlg;
 	YSpathDlg.DoModal();   //弹出存储路径对话框
+}
+
+
+void CCameraControlDlg::OnBnClickedButton15()
+{
+	// TODO: Add your control notification handler code here
 }

@@ -96,4 +96,10 @@ public:
 	afx_msg void OnBnClickedButton19();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton15();
+
+private:
+	CString m_strSavePath;
+	CString m_strIniPath;
+
 };

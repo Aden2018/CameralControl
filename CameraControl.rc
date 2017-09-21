@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日语(日本) resources
+// Japanese (Japan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -52,12 +52,12 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 日语(日本) resources
+#endif    // Japanese (Japan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(简体) resources
+// Chinese (Simplified) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_NEUTRAL
@@ -116,7 +116,8 @@ BEGIN
     GROUPBOX        "焦距调节",IDC_STATIC,9,190,91,60
     GROUPBOX        "查看",IDC_STATIC,10,253,90,40
     LTEXT           "下载进度：",IDC_STATIC,355,279,44,12
-    PUSHBUTTON      "样本入库",IDC_BUTTON19,355,299,65,14
+    PUSHBUTTON      "样本入库",IDC_BUTTON19,413,293,65,14
+    LTEXT           "当前路径:",IDC_TXT_PATH,270,303,38,8
 END
 
 
@@ -138,12 +139,12 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 中文(简体) resources
+#endif    // Chinese (Simplified) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(简体，中国) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -250,7 +251,7 @@ BEGIN
     IDS_ABOUTBOX            "&About CameraControl..."
 END
 
-#endif    // 中文(简体，中国) resources
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

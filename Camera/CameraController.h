@@ -65,7 +65,6 @@ public:
 	{
 		std::string command = event.getActionCommand();
 
-
 		if ( command == "opensession" )
 		{
 			StoreAsync(new OpenSessionCommand(_model));
@@ -245,6 +244,7 @@ public:
 
 	}
 
+	//void doCloseEVFAction(){StoreAsync(new EndEvfCommand(_model));}
 
 protected:
 	//The command is received
@@ -255,6 +255,5 @@ protected:
 			_processor.enqueue( command );
 		}
 	}
-
 
 };

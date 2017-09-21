@@ -37,7 +37,7 @@ public:
 		m_nImageIndex ++;
 		AcqSequence[m_nImageIndex]=m_nImageIndex;
 		CString JpgSequence;
-		JpgSequence.Format("%2d.jpg",AcqSequence[m_nImageIndex]);
+		JpgSequence.Format("%02d.jpg",AcqSequence[m_nImageIndex]);
 		filename = m_strPictruefile + "\\" + m_strImageName + JpgSequence;
 
 		//Acquisition of the downloaded image information
