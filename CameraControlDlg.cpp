@@ -23,14 +23,81 @@
 
 // CCameraControlDlg 
 
+CString CCameraControlDlg::GetAppPath()
+{
+	//取得应用程序路径	
+	TCHAR exeFullPath[MAX_PATH];
+	GetModuleFileName(NULL,exeFullPath,MAX_PATH);
+	CString pathName(exeFullPath);
+
+	//返回值最后自带'\\'
+	int index =pathName.ReverseFind('\\');
+	return pathName.Left(index+1);
+}
+
 CCameraControlDlg::CCameraControlDlg(CWnd* pParent )
 	: CDialog(CCameraControlDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m_strIniPath = "settingD.ini";
-
-	GetPrivateProfileString("Setting","RootPath","E:\\3DData\\",m_strSavePath.GetBuffer(),100,m_strIniPath);
+	m_strIniPath = GetAppPath() + "settingD.ini";
 	
+	GetPrivateProfileString("Setting","RootPath","E:\\3DData",m_strSaveRootPath,100,m_strIniPath);
+	GetPrivateProfileString("Setting","Type","MidView",m_strSaveType,100,m_strIniPath);
+	GetPrivateProfileString("Setting","Name","3dPicture",m_strSaveName,100,m_strIniPath);
+	m_nSaveIdx = GetPrivateProfileInt("Setting","Index",1,m_strIniPath);
+	g_savePath = findAndCreateValidPath();
+
+}
+
+CString CCameraControlDlg::GenerateFullPath()
+{
+	CString path;
+	path.Format("%s\\%s_%02d\\%s",m_strSaveRootPath,m_strSaveName,m_nSaveIdx,m_strSaveType);
+	return path;
+}
+
+int CCameraControlDlg::GetFileName(const string &strFolder, vector<string> &strVecFileNames)
+{
+	strVecFileNames.clear();
+	struct _finddata_t filefind;   
+	string  curr=strFolder + "\\*.*";   
+	int  done=0;
+	int  handle;   
+	if((handle=_findfirst(curr.c_str(),&filefind))==-1)
+		return -1; 
+	string tempfolder = strFolder + "\\";
+	while(!(done=_findnext(handle,&filefind)))   
+	{   
+		if(!strcmp(filefind.name,".."))  //用此方法第一个找到的文件名永远是".."，所以需要单独判断
+			continue;
+		strVecFileNames.push_back(tempfolder + filefind.name);
+	}
+	_findclose(handle);  
+	return strVecFileNames.size();
+	
+}
+
+CString CCameraControlDlg::findAndCreateValidPath()
+{
+	CString path;
+	while(true)
+	{
+		path=GenerateFullPath();	
+		if(!FolderExists(path))
+		{
+			SuperMkDir1(path);
+			return path;
+		}
+
+		if(FolderExists(path) && GetFileName(path.GetBuffer(),vector<string>())==0)
+		{
+			return path;
+		}
+
+		++m_nSaveIdx;
+	}
+	AfxMessageBox("未找到可以存档目录，请修改配置文件。");
+	return "";
 }
 
 void CCameraControlDlg::DoDataExchange(CDataExchange* pDX)
@@ -74,6 +141,7 @@ BEGIN_MESSAGE_MAP(CCameraControlDlg, CDialog)
 	ON_MESSAGE(WM_USER_DOWNLOAD_COMPLETE, OnDownloadComplete)
 	ON_MESSAGE(WM_USER_PROGRESS_REPORT, OnProgressReport)
 	ON_WM_CLOSE()
+	ON_BN_CLICKED(IDC_BTN_SET_PATH, &CCameraControlDlg::OnBnClickedBtnSetPath)
 END_MESSAGE_MAP()
 
 
@@ -91,7 +159,12 @@ BOOL CCameraControlDlg::OnInitDialog()
 
 	// A set value of the camera is acquired. 
 	// The value to which the camera can be set is acquired. 
+	CString curPath = "当前路径:";
+	curPath += g_savePath;
 	
+
+	SetDlgItemText(IDC_TXT_PATH,curPath);
+
 	return TRUE;   // return TRUE  unless you set the focus to a control
 }
 
@@ -256,22 +329,61 @@ CString GetAppPath()
 	return pathName.Left(index+1);
 }
 
-void CCameraControlDlg::OnBnClickedButton19()  //选择图片存储文件夹
-{
-	// TODO: 在此添加控件通知处理程序代码
-	m_nImageIndex=0;  //图片拍照索引值清0
+bool CCameraControlDlg::SuperMkDir1(CString P)  
+{  
+	int len=P.GetLength();  
+	if ( len <2 ) return false;   
 
-	//得到二级目录名称 E:\\3Drestructure\\相机600D\\settingD.ini
-	
-	//m_pathSecIndex=::GetPrivateProfileInt("二级目录索引值","m_pathIndex",0,"E:\\3Drestructure\\相机600D\\settingD.ini");
-	m_pathSecIndex = ::GetPrivateProfileInt("二级目录索引值","m_pathIndex",0,GetAppPath()+"settingD.ini");
-	
-	CYanshiPath  YSpathDlg;
-	YSpathDlg.DoModal();   //弹出存储路径对话框
-}
+	if('\\'==P[len-1])  
+	{  
+		P=P.Left(len-1);  
+		len=P.GetLength();  
+	}  
+	if ( len <=0 ) return false;  
 
+	if (len <=3)   
+	{  
+		if (FolderExists(P))return true;  
+		else return false;   
+	}  
 
-void CCameraControlDlg::OnBnClickedButton15()
+	if (FolderExists(P))return true;  
+
+	CString Parent;  
+	Parent=P.Left(P.ReverseFind('\\') );  
+
+	if(Parent.GetLength()<=0)return false;   
+
+	bool Ret=SuperMkDir1(Parent);   
+
+	if(Ret)   
+	{  
+		SECURITY_ATTRIBUTES sa;  
+		sa.nLength=sizeof(SECURITY_ATTRIBUTES);  
+		sa.lpSecurityDescriptor=NULL;  
+		sa.bInheritHandle=0;  
+		Ret=(CreateDirectory(P,&sa)==TRUE);  
+		return Ret;
+	}
+	else  
+		return false;  
+}  
+
+void CCameraControlDlg::OnBnClickedBtnSetPath()
 {
 	// TODO: Add your control notification handler code here
+	// TODO: 在此添加控件通知处理程序代码
+	CYanshiPath YSpathDlg(m_strSaveRootPath,m_strSaveType,m_nSaveIdx,m_strSaveName);
+	if(YSpathDlg.DoModal()==IDCANCEL)   //弹出存储路径对话框
+		return;
+	g_imgIdx = 0;
+	GetPrivateProfileString("Setting","RootPath","E:\\3DData",m_strSaveRootPath,100,m_strIniPath);
+	GetPrivateProfileString("Setting","Type","MidView",m_strSaveType,100,m_strIniPath);
+	GetPrivateProfileString("Setting","Name","3dPicture",m_strSaveName,100,m_strIniPath);
+	m_nSaveIdx = YSpathDlg.m_SaveIdx;
+	g_savePath = findAndCreateValidPath();
+
+	CString curPath = "当前路径:";
+	curPath += g_savePath;
+	SetDlgItemText(IDC_TXT_PATH,curPath);
 }

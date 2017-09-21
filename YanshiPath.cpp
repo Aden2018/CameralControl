@@ -12,14 +12,18 @@ CString pathThird=" ";  //三级目录临时变量
 
 IMPLEMENT_DYNAMIC(CYanshiPath, CDialogEx)
 
-CYanshiPath::CYanshiPath(CWnd* pParent /*=NULL*/)
+CYanshiPath::CYanshiPath(CString rootPath,CString SaveType,int SaveIdx,CString SaveName,CWnd* pParent)
 	: CDialogEx(CYanshiPath::IDD, pParent)
-	, pathFirst(_T("E:\\3dDataD"))
-	, pathSecond(_T(" "))
-	, Tmid(_T("midview"))
-	, Tup(_T("upview"))
+	, m_rootPath(rootPath)
+	, m_SaveName(SaveName)
+	, m_SaveType(SaveType)
+	, m_SaveIdx(SaveIdx)
 {
-
+	m_secPath.Format("%s_%02d",m_SaveName,m_SaveIdx);
+	if(m_SaveType== "MidView")
+		m_nSaveType = 0;
+	else m_nSaveType = 1;
+	//UpdateData(TRUE);
 }
 
 CYanshiPath::~CYanshiPath()
@@ -29,8 +33,9 @@ CYanshiPath::~CYanshiPath()
 void CYanshiPath::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_pathFirst, pathFirst);
-	DDX_Text(pDX, IDC_pathSecond, pathSecond);
+	DDX_Text(pDX, IDC_pathFirst, m_rootPath);
+	DDX_Text(pDX, IDC_pathSecond, m_secPath);
+	DDX_Radio(pDX, IDC_pathThirdM, m_nSaveType);
 }
 
 
@@ -51,31 +56,23 @@ void CYanshiPath::OnBnClickedpathsecondjia()  //二级目录名加1
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//二级目录
-	m_pathSecIndex ++;
-	AcqPathSecSequence[m_pathSecIndex]=m_pathSecIndex;
-	CString JpgSequence;
-	JpgSequence.Format("_%d",AcqPathSecSequence[m_pathSecIndex]);	
-	pathSecond = "3dpicture"  + JpgSequence;
-
+	m_SaveIdx++;
+	m_secPath.Format("%s_%02d",m_SaveName,m_SaveIdx);
 	UpdateData(FALSE);
+
 }
 
 void CYanshiPath::OnBnClickedpathsecondjian()  //二级目录名减1
 {
 	// TODO: 在此添加控件通知处理程序代码
-	if (m_pathSecIndex>0)
+
+
+	if(m_SaveIdx >=2)
 	{
-		m_pathSecIndex --;
-		AcqPathSecSequence[m_pathSecIndex]=m_pathSecIndex;
-		CString JpgSequence;
-		JpgSequence.Format("_%d",AcqPathSecSequence[m_pathSecIndex]);	
-		pathSecond = "3dpicture"  + JpgSequence;
-	} 
-	else
-	{
-		m_pathSecIndex=0;
+		m_SaveIdx--;
+		m_secPath.Format("%s_%02d",m_SaveName,m_SaveIdx);
+		UpdateData(FALSE);
 	}
-	UpdateData(FALSE);
 }
 
 
@@ -83,7 +80,7 @@ void CYanshiPath::OnBnClickedpaththirdm()   //三级目录，中视角
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//三级目录
-	pathThird=Tmid;
+	m_SaveType = "MidView";
 }
 
 
@@ -91,21 +88,36 @@ void CYanshiPath::OnBnClickedpaththirdu()  //三级目录，上视角
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//三级目录
-	pathThird=Tup;
+	m_SaveType = "UpView";
+}
+
+
+CString CYanshiPath::GetAppPath1()
+{
+	//取得应用程序路径	
+	TCHAR exeFullPath[MAX_PATH];
+	GetModuleFileName(NULL,exeFullPath,MAX_PATH);
+	CString pathName(exeFullPath);
+
+	//返回值最后自带'\\'
+	int index =pathName.ReverseFind('\\');
+	return pathName.Left(index+1);
 }
 
 void CYanshiPath::OnBnClickedOk()  //按下确定键后再创建目录
 {
 	// TODO: 在此添加控件通知处理程序代码
-	m_strPictruefile=pathFirst+"\\"+pathSecond+"\\"+pathThird;
-	SuperMkDir(m_strPictruefile);
-
-	//将二级文件夹索引值写入settingD.ini
-	CString pathSecIni;
-	pathSecIni.Format("%d",m_pathSecIndex);
-	//E:\\3Drestructure\\相机600D\\settingD.ini
-	::WritePrivateProfileString("二级目录索引值","m_pathIndex",pathSecIni,"E:\\3Drestructure\\相机600D\\settingD.ini");  
-
+	GetDlgItem(IDC_pathFirst)->GetWindowTextA(m_rootPath);
+	GetDlgItem(IDC_pathSecond)->GetWindowTextA(m_secPath);
+	m_SaveIdx = atoi(m_secPath.Right(2));
+	m_SaveName = m_secPath.Left(m_secPath.GetLength()-3);
+	CString iniPath = GetAppPath1() + "settingD.ini";
+	WritePrivateProfileString("setting","RootPath",m_rootPath,iniPath);
+	WritePrivateProfileString("setting","Type",m_SaveType,iniPath);
+	WritePrivateProfileString("setting","Name",m_SaveName,iniPath);
+	CString idx;
+	idx.Format("%d",m_SaveIdx);
+	WritePrivateProfileString("setting","Index",idx,iniPath);
 	CDialogEx::OnOK();
 }
 

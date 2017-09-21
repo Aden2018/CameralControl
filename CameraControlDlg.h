@@ -5,7 +5,11 @@
 #include <map>
 #include "Observer.h"
 #include "CameraController.h"
-
+#include <string>
+#include <vector>
+#include <io.h>
+using std::vector;
+using std::string;
 
 #include "AEMode.h"
 #include "Tv.h"
@@ -93,13 +97,28 @@ protected:
 
 public:
 	afx_msg void OnClose();
-	afx_msg void OnBnClickedButton19();
-	afx_msg void OnBnClickedButton2();
-	afx_msg void OnBnClickedButton3();
-	afx_msg void OnBnClickedButton15();
+
 
 private:
-	CString m_strSavePath;
+	char m_strSaveRootPath[256];
 	CString m_strIniPath;
-
+	char m_strSaveType[256];
+	int		m_nSaveIdx;
+	char m_strSaveName[256]; //子文件夹的名称 3dpicture
+	//CString m_strSavePath; //最终保存的文件夹全路径
+	CString GetAppPath();
+	CString findAndCreateValidPath();
+	CString CCameraControlDlg::GenerateFullPath();
+	int GetFileName(const string &strFolder, vector<string> &strVecFileNames);
+	bool SuperMkDir1(CString P);
+	// 判断目录是否存在  
+	bool FolderExists(CString s)
+	{  
+		DWORD attr;   
+		attr = GetFileAttributes(s);   
+		return (attr != (DWORD)(-1) ) &&  
+			( attr & FILE_ATTRIBUTE_DIRECTORY);   
+	} 
+public:
+	afx_msg void OnBnClickedBtnSetPath();
 };

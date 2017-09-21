@@ -33,12 +33,16 @@ public:
 		EdsError				err = EDS_ERR_OK;
 		EdsStreamRef			stream = NULL;
 
-		////更改每次拍摄的图片名
-		m_nImageIndex ++;
+		//更改每次拍摄的图片名
+		
+		/*m_nImageIndex ++;
 		AcqSequence[m_nImageIndex]=m_nImageIndex;
 		CString JpgSequence;
 		JpgSequence.Format("%02d.jpg",AcqSequence[m_nImageIndex]);
-		filename = m_strPictruefile + "\\" + m_strImageName + JpgSequence;
+		filename = m_strPictruefile + "\\" + m_strImageName + JpgSequence;*/
+		CString strIdx;
+		strIdx.Format("%02d",++g_imgIdx);
+		CString fileName = g_savePath + "\\" + g_imgPreFix + strIdx + ".jpg";
 
 		//Acquisition of the downloaded image information
 		EdsDirectoryItemInfo	dirItemInfo;
@@ -47,7 +51,7 @@ public:
 		//Make the file stream at the forwarding destination
 		if(err == EDS_ERR_OK)
 		{	
-			err = EdsCreateFileStream(filename, kEdsFileCreateDisposition_CreateAlways, kEdsAccess_ReadWrite, &stream);
+			err = EdsCreateFileStream(fileName, kEdsFileCreateDisposition_CreateAlways, kEdsAccess_ReadWrite, &stream);
 			//err = EdsCreateFileStream(dirItemInfo.szFileName, kEdsFileCreateDisposition_CreateAlways, kEdsAccess_ReadWrite, &stream);
 
 			//通知主界面开始下载

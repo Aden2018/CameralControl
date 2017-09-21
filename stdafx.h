@@ -44,21 +44,6 @@
 #include <afx.h>
 #include <afxcontrolbars.h>
 
-//图像名称
-extern  CString m_strImageName;
-
-//当前图片序号
-extern  int m_nImageIndex;	
-
-//用户所选择的扫描区域采集顺序
-extern  int AcqSequence[];
-
-//保存岩石存储临时文件 
-extern  CString filename;
-
-//当前的二级目录索引值
-extern int m_pathSecIndex;	
-extern int AcqPathSecSequence[];
-
-//岩石对应的文件夹
-extern  CString m_strPictruefile;
+extern CString g_imgPreFix; //图像前缀
+extern int g_imgIdx;
+extern CString g_savePath;  //岩石对应的文件夹

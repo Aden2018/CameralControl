@@ -116,8 +116,8 @@ BEGIN
     GROUPBOX        "焦距调节",IDC_STATIC,9,190,91,60
     GROUPBOX        "查看",IDC_STATIC,10,253,90,40
     LTEXT           "下载进度：",IDC_STATIC,355,279,44,12
-    PUSHBUTTON      "样本入库",IDC_BUTTON19,413,293,65,14
-    LTEXT           "当前路径:",IDC_TXT_PATH,270,303,38,8
+    LTEXT           "当前路径:",IDC_TXT_PATH,241,312,229,8
+    PUSHBUTTON      "修改图片保存路径",IDC_BTN_SET_PATH,401,293,76,14
 END
 
 
@@ -166,7 +166,7 @@ BEGIN
     LTEXT           "二级目录:",IDC_STATIC,27,52,36,8
     EDITTEXT        IDC_pathSecond,73,50,59,14,ES_AUTOHSCROLL
     LTEXT           "扫描模式:",IDC_STATIC,27,86,41,22
-    CONTROL         "Mid",IDC_pathThirdM,"Button",BS_AUTORADIOBUTTON,80,84,27,10
+    CONTROL         "Mid",IDC_pathThirdM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,80,84,27,10
     CONTROL         "Up",IDC_pathThirdU,"Button",BS_AUTORADIOBUTTON,80,102,25,10
     EDITTEXT        IDC_pathFirst,72,20,60,14,ES_AUTOHSCROLL
     PUSHBUTTON      "+1",IDC_pathSecondJia,139,49,23,14
