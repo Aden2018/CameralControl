@@ -312,7 +312,13 @@ LRESULT CCameraControlDlg::OnDownloadComplete(WPARAM wParam, LPARAM lParam)
 	//End of download of image
 	_progress.SetPos(0);
 	if(--m_nCount > 0)
+	{
 		fireEvent("TakePicture");
+		CString str;
+		str.Format("当前第:%d\\%d张.",m_nAll-m_nCount,m_nAll);
+		SetDlgItemText(IDC_TXT_PIC_NUM,str);
+	}
+		
 	return 0;
 }
 
@@ -403,17 +409,15 @@ void CCameraControlDlg::OnStnClickedTxtPath()
 void CCameraControlDlg::OnBnClickedBtnOpenSavepath()
 {
 	// TODO: Add your control notification handler code here
-
-	system("explorer " + g_savePath);
-
-	//WinExec("explorer \"" + g_savePath + "\"",SW_HIDE);
+	ShellExecute(NULL, "open", g_savePath, NULL, NULL,SW_SHOWMAXIMIZED);
 }
 
 
 void CCameraControlDlg::OnBnClickedBtnTakesomepics()
 {
 	// TODO: Add your control notification handler code here
-	m_nCount = 30;
+	m_nAll = GetPrivateProfileInt("setting","count",30,m_strIniPath);
+	m_nCount = m_nAll;
 	fireEvent("TakePicture");
 }
 

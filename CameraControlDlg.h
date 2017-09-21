@@ -106,6 +106,7 @@ private:
 	int		m_nSaveIdx;
 	char m_strSaveName[256]; //子文件夹的名称 3dpicture
 	int m_nCount;
+	int m_nAll;
 	//CString m_strSavePath; //最终保存的文件夹全路径
 	CString GetAppPath();
 	CString findAndCreateValidPath();
